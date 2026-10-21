@@ -4,9 +4,9 @@ A Claude Code skill (`/ship`) and nine agents that run a software change the way
 
 ## Why this exists
 
-One AI agent that plans, writes, and approves its own code grades its own homework. It rarely catches what it got wrong, because it made the same assumptions twice.
+When one AI agent plans, writes, and approves its own code, the review is weak. It makes the same assumptions in the review that it made in the build, so it misses the same mistakes.
 
-A real team avoids this with roles. The person who specs isn't the person who builds, the reviewer isn't the author, and QA tries to break the thing instead of confirming it works. This repo gives Claude Code those roles.
+Engineering teams solve this with roles. The person who specs isn't the person who builds, the reviewer isn't the author, and QA tries to break the change instead of confirming it. This repo gives Claude Code those roles.
 
 `/ship` is the orchestrator. It doesn't write code. It decides which specialists a change needs, gives each one only what it should see, and refuses to move forward on a failed gate.
 
@@ -28,13 +28,13 @@ Copy changes add `copywriter` then `editor`. Changes touching AI prompts add `pr
 
 The pipeline scales to the change. A typo doesn't get a five-agent panel. Skipped stages are listed in the PR.
 
-## The rules it holds itself to
+## The rules it follows
 
-- **The author never reviews itself.** Review runs on a different model, and the reviewer never sees the engineer's rationale.
-- **Nothing merges without your say-so for that specific PR.** The pipeline stops at a draft PR. Deploys are never automatic.
-- **Failed gates stay failed.** A refuted QA verdict gets fixed, not reworded.
-- **Every stage leaves a file.** Each run writes its artifacts to `.pipeline/<date>-<task>/`, so a run can be audited or resumed after a crash.
-- **Cost follows risk.** The strongest model goes to the planner and reviewers, where a mistake is expensive and hard to see. Cheaper models run the work that's checked downstream.
+- Review runs on a different model from the engineer, and the reviewer never sees the engineer's reasoning.
+- Nothing merges without your approval for that specific PR. The pipeline stops at a draft PR, and it never deploys.
+- A failed gate gets fixed. A refuted QA verdict is never reworded into a pass.
+- Each run saves its artifacts to `.pipeline/<date>-<task>/`, so you can audit it or resume after a crash.
+- The strongest model goes to the planner and reviewers, where mistakes are costly and hard to see. Cheaper models handle work that gets checked downstream.
 
 ## What's here
 
