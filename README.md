@@ -1,4 +1,4 @@
-# claude-code-ship-workflow
+# ship-team
 
 A Claude Code skill (`/ship`) and nine agents that run a software change the way a small engineering team would: scoped, specced, built, reviewed by someone who didn't write it, tested, and handed back as a draft PR.
 
@@ -51,9 +51,9 @@ agents/                               planner, engineer, code-reviewer, qa-verif
 Copy the skill and agents into your Claude Code config:
 
 ```bash
-git clone https://github.com/dwang-co/claude-code-ship-workflow.git
-cp -r claude-code-ship-workflow/skills/ship ~/.claude/skills/
-cp claude-code-ship-workflow/agents/*.md ~/.claude/agents/
+git clone https://github.com/dwang-co/ship-team.git
+cp -r ship-team/skills/ship ~/.claude/skills/
+cp ship-team/agents/*.md ~/.claude/agents/
 ```
 
 Then run `/ship` with a task, such as `/ship add rate limiting to the signup endpoint`.
