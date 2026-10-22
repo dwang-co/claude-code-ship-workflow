@@ -41,6 +41,7 @@ The pipeline scales to the change. A typo doesn't get a five-agent panel. Skippe
 ```
 skills/ship/SKILL.md                  the orchestrator: stages, gates, hard rules
 skills/ship/references/escalated-hunt.md   what to do when review keeps finding new problems
+skills/retro/SKILL.md                 the learning loop: turns lessons into reviewed edits
 agents/                               planner, engineer, code-reviewer, qa-verifier,
                                       design-strategist, gtm-strategist,
                                       copywriter, editor, prompt-reviewer
@@ -66,6 +67,20 @@ Some stages lean on tools this repo doesn't include. All are used only when you 
 - The Claude in Chrome extension, which `design-strategist` uses to look at the real UI.
 - Your own `/design-solution` skill for new UI direction, and `/scope` to decide whether something should be built at all.
 - A `/dual-review` skill (Claude plus Codex, blind to each other) that `/ship` calls on risky specs.
+
+## The learning loop: `/retro`
+
+`/ship` only improves if what it learns gets written down, and `/retro` does the writing down. After a PR lands, it reads the run folders, the session, and the corrections you made in review, then proposes edits to the agent files, skills, and `CLAUDE.md`.
+
+- Every proposal has to point to a failure that actually happened.
+- Proposals arrive one at a time as four plain lines: what went wrong, the fix, how confident it is, and the impact. Nothing is edited until you approve it.
+- Each pass also prunes. It checks the files it touched for stale, duplicate, or contradictory rules, and flags any file that has only grown.
+
+Install it the same way as `/ship`:
+
+```bash
+cp -r ship-team/skills/retro ~/.claude/skills/
+```
 
 ## Make it yours
 
